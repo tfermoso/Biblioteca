@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/lblLibros"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.spinoffpyme.biblioteca.titleFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lista de libros"/>
-    <ListView
-        android:id="@+id/lstLibros"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" />
 
-    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblLibros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lista de libros" />
+
+        <ListView
+            android:id="@+id/lstLibros"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frmDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp">
+
+    </FrameLayout>
+
 </LinearLayout>

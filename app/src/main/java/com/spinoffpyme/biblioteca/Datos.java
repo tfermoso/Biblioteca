@@ -18,6 +18,7 @@ public final class Datos {
 
     };
 
+
 static public  String[] getNombres(){
     String ret[]=new String[9];
     ret[0]=lista[0][0];
