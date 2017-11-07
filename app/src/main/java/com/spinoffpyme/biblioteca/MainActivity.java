@@ -13,17 +13,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+
 public class MainActivity extends AppCompatActivity implements DetailsFragment.InterfaceDatos {
     static public final String KEY_LIST="numlist"; //clave para acceder al parámetro para mostrar
     //Añadimos
     static public final int FRAGMENT_ID=0; //id para el fragmento, solo habrá uno
     static public final int NO_DETALLE=-1;
+
     Fragment fragmentAct=null; //puntero al fragmento, evitar buscarlo para borrar
     ///
     static public String KEY_RTN_VAL1="valor1"; //
     private static int COD_RTN_ACT=0;
     Context ctx;
-    int numLista=0;
+    int numLista=NO_DETALLE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements DetailsFragment.I
 
         if(savedInstanceState!=null){
             //Estamos recreando la actividad, hay un Bundle de vuelta
-            numLista=savedInstanceState.getInt(KEY_LIST,0);
+            numLista=savedInstanceState.getInt(KEY_LIST,-1);
         }
         //Ponemos los datos en la lista
         ListView lv=(ListView)this.findViewById(R.id.lstLibros);
@@ -57,11 +60,19 @@ public class MainActivity extends AppCompatActivity implements DetailsFragment.I
                 */
 
                 //Para simplificar creamos una función
+                /*
+                Vamos a detectar si estamos en portrait o landscape,
+
+                 */
+                if(getResources().getConfiguration().orientation== ORIENTATION_PORTRAIT){
+                    System.out.println("Pantalla en portrait");
+                }
                 addDetalles(numLista);
             }
         });
         //si tenemos que recrear la actividad se carga el detalle que había
         //la primera vez noo cargará nada
+        System.out.println("Cargamos numlista: "+numLista);
         if(numLista>NO_DETALLE)addDetalles(numLista);
     }
 
@@ -80,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements DetailsFragment.I
         Bundle data=new Bundle();
         data.putInt(KEY_LIST,numLista);
         fragment.setArguments(data);
-        if(fragmentOld!=null){ //si no hay fragmento se añade, sino se reemplaza
+        if(fragmentOld==null){ //si no hay fragmento se añade, sino se reemplaza
             transicion.add(R.id.frmDetalles,fragment);
         }else{
             transicion.replace(R.id.frmDetalles,fragment);
