@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,6 +41,33 @@ public class MainActivity extends AppCompatActivity implements DetailsFragment.I
     int numFragQueue = 0; //comprobar sii estamos eliminando un fragmento de la cola
     Stack<String> pilaTagFragmentos = new Stack<>();//pila para los tag de los fragmentos creados
 
+    //Añadimos un menú al la barra de menú que viene por defecto
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu_item,menu);
+        //return super.onCreateOptionsMenu(menu);
+        return true;
+    }
+    //Añadimos eventos a los items del menú
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //return super.onOptionsItemSelected(item);
+        //Gestión del elemento
+        switch (item.getItemId()){
+            case R.id.about:
+                Toast.makeText(getApplication(),"Pulsado about",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.settings:
+                Toast.makeText(getApplication(),"Pulsado settings",Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
